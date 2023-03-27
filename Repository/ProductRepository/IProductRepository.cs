@@ -1,9 +1,10 @@
 using Core.Entity;
 using Core.Repository;
+using Entity;
 
 namespace Repository.ProductRepository;
 
-public interface IProductRepository<TEntity> : IRepository<TEntity> where TEntity:class,IEntity, new()
+public interface IProductRepository : IRepository<Product>
 {
     
 }

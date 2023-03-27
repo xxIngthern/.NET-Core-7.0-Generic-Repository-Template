@@ -1,11 +1,10 @@
 using Entity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Repository.ProductRepository;
 
-public class ProductRepository:BaseRepository<Product>,IProductRepository<Product>
+public class ProductRepository:BaseRepository<Product>,IProductRepository
 {
-    public ProductRepository(BaseContext context, DbSet<Product> dbSet) : base(context, dbSet)
+    public ProductRepository(BaseContext context) : base(context)
     {
     }
 }

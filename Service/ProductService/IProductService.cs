@@ -1,8 +1,9 @@
 using Core.Service;
+using Entity;
 
 namespace Service.ProductService;
 
-public interface IProductService<TEntity>:IService<TEntity>
+public interface IProductService:IService<Product>
 {
     
 }

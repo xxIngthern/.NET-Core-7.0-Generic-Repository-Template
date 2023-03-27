@@ -1,8 +1,9 @@
 using Core.Service;
+using Entity;
 
 namespace Service.CategoryService;
 
-public interface ICategoryService<TEntity>:IService<TEntity>
+public interface ICategoryService:IService<Category>
 {
     
 }

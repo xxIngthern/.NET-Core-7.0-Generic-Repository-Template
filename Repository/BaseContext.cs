@@ -7,9 +7,14 @@ using Microsoft.Extensions.Options;
 
 namespace Repository;
 
-public sealed partial class BaseContext : DbContext
+public class BaseContext : DbContext
 {
     private readonly DatabaseConnectionString _connectionString;
+
+    public BaseContext()
+    {
+        
+    }
     public BaseContext(IOptions<DatabaseConnectionString> connectionString, DbSet<Category> categories, DbSet<Product> products)
     {
         Categories = categories;

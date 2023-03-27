@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repository.CategoryRepository;
 
-public interface ICategoryRepository<TEntity> : IRepository<TEntity>
-    where TEntity : class, IEntity, new()
+public interface ICategoryRepository : IRepository<Category>
 {
 }

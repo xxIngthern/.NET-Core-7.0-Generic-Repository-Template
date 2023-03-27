@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repository.CategoryRepository;
 
-public class CategoryRepository: BaseRepository<Category>, ICategoryRepository<Category>
+public class CategoryRepository: BaseRepository<Category>, ICategoryRepository
 {
-    public CategoryRepository(BaseContext context, DbSet<Category> dbSet) : base(context, dbSet)
+    public CategoryRepository(BaseContext context) : base(context)
     {
     }
 }
