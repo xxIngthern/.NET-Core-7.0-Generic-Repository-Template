@@ -3,4 +3,4 @@ attributes:
   space:
     editor:
       type: Rider
-    projectRoot: repositories/.NET-Core-7.0-Generic-Repository-Template/files/Dotnet.Core.Generic.Repository.Template.sln
+    projectRoot: Dotnet.Core.Generic.Repository.Template.sln
