@@ -4,7 +4,7 @@ namespace Entity;
 
 public sealed class Product : IEntity
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     public int CategoryId { get; set; }
 

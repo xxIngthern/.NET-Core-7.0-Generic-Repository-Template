@@ -1,44 +1,40 @@
 using Core.Entity;
 using Core.Repository;
-using Microsoft.EntityFrameworkCore;
+using Environment.Settings;
+using MongoDB.Driver;
 
 namespace Repository;
 
-public class BaseRepository<TEntity> :IRepository<TEntity> 
-    where TEntity:class, IEntity,new()
+public class BaseRepository<TEntity>:IRepository<TEntity> 
+    where TEntity:class, IEntity, new()
 {
-    private readonly BaseContext _context;
-  
-    protected BaseRepository(BaseContext context)
+    private readonly IMongoCollection<TEntity> _collection;
+    public BaseRepository(DatabaseSettings connection, BaseContext context)
     {
-        _context = context;
-       
+        _collection = context.GetDatabase(connection.DatabaseName).GetCollection<TEntity>(connection.CollectionName);
     }
     public void Add(TEntity entity)
     {
-        _context.Set<TEntity>().Add(entity);
-        _context.SaveChanges();
+        _collection.InsertOne(entity);
     }
 
-    public void Update(TEntity entity)
+    public void Update(string id, TEntity entity)
     {
-        _context.Set<TEntity>().Update(entity);
+        _collection.ReplaceOne(e => e.Id == id, entity);
     }
 
-    public void Delete(TEntity entity)
+    public void Delete(string id)
     {
-        _context.Set<TEntity>().Remove(entity);
+        _collection.DeleteOne(e => e.Id == id);
     }
 
-    public async Task<TEntity> GetByIdAsync(int id)
+    public async Task<TEntity> GetByIdAsync(string id)
     {
-        var entity = await _context.Set<TEntity>().Where(e => e.Id == id).SingleOrDefaultAsync();
-        return (entity ?? null) ?? throw new InvalidOperationException();
+        return await _collection.Find(e => e.Id == id).FirstOrDefaultAsync();
     }
 
     public async Task<List<TEntity>> GetAllAsync()
     {
-        var entities = await _context.Set<TEntity>().AsNoTracking().ToListAsync();
-        return entities;
+        return await _collection.Find(_ => true).ToListAsync();
     }
 }
